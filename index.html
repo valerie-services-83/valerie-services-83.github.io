@@ -89,7 +89,7 @@ section img {
 
 <label>Prestation souhaitée
 
-<select name="prestation" required style="width:100%;padding:12px;box-sizing:border-box">
+<select id="prestation" name="prestation"required style="width:100%;padding:12px;box-sizing:border-box">
 
 <option value="">-- Choisissez une prestation --</option>
 
@@ -265,5 +265,28 @@ document.addEventListener('DOMContentLoaded', function () {
 </section>
 </main>
 <footer><strong>Valérie Services & Pet-sitter-83</strong><p>Services au quotidien et pet-sitting à votre domicile</p><p>ACACED · SIRET 10217385300015</p></footer>
+<script>
+
+const choix = new URLSearchParams(window.location.search).get("prestation");
+
+const menu = document.getElementById("prestation");
+
+if (choix && menu) {
+
+  for (const option of menu.options) {
+
+    if (option.textContent.trim() === choix) {
+
+      menu.value = option.value;
+
+      break;
+
+    }
+
+  }
+
+}
+
+</script>
 </body>
 </html>
