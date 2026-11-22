@@ -409,5 +409,74 @@ if (choix && menu) {
 
 <a href="#" aria-label="Retour en haut" style="position:fixed;bottom:85px;right:12px;background:#d97706;color:white;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:24px;z-index:9999;box-shadow:0 2px 8px #0004;">↑</a>
 <p style="text-align:center; font-size:13px; color:#666;">© 2026 Valérie Services &amp; Pet-sitter-83 — Tous droits réservés.</p> 
+<!-- Bandeau de consentement -->
+
+<div id="bandeau-cookies" style="position:fixed;bottom:0;left:0;width:100%;box-sizing:border-box;background:#fff8e7;color:#345;padding:18px;text-align:center;box-shadow:0 -2px 12px #0002;z-index:9999;display:none;">
+
+  <p>🍪 Ce site utilise des cookies statistiques pour mesurer les visites. Vous pouvez accepter ou refuser.</p>
+
+  <button type="button" onclick="choisirCookies(true)" style="padding:12px;margin:5px;background:#e9a23b;border:0;border-radius:10px;">Accepter</button>
+
+  <button type="button" onclick="choisirCookies(false)" style="padding:12px;margin:5px;background:#eee;border:0;border-radius:10px;">Refuser</button>
+
+</div>
+
+<script>
+
+const consentement = localStorage.getItem("cookies-statistiques");
+
+function activerStatistiques() {
+
+  const s = document.createElement("script");
+
+  s.async = true;
+
+  s.src = "https://www.googletagmanager.com/gtag/js?id=G-6CYVV5BX5B";
+
+  document.head.appendChild(s);
+
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){dataLayer.push(arguments);}
+
+  window.gtag = gtag;
+
+  gtag("js", new Date());
+
+  gtag("config", "G-6CYVV5BX5B");
+
+}
+
+function choisirCookies(accepte) {
+
+  localStorage.setItem("cookies-statistiques", accepte ? "oui" : "non");
+
+  document.getElementById("bandeau-cookies").style.display = "none";
+
+  if (accepte) activerStatistiques();
+
+}
+
+if (consentement === "oui") {
+
+  activerStatistiques();
+
+} else if (consentement === null) {
+
+  document.getElementById("bandeau-cookies").style.display = "block";
+
+}
+
+
+</script>
+<p style="text-align:center;">
+
+  <button type="button" onclick="document.getElementById('bandeau-cookies').style.display='block'">
+
+    🍪 Gestion des cookies
+
+  </button>
+
+</p>
 </body>
 </html>
